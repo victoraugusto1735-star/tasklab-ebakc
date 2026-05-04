@@ -28,7 +28,7 @@ export default function TarefasClient({ tarefasIniciais }: { tarefasIniciais: Ta
         ))}
       </ul>
 
-      <NovaTarefa onAdd={onAdd} />
+      <NovaTarefa/>
     </>
   )
 }

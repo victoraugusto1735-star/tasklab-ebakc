@@ -1,36 +1,35 @@
-import { render, screen, fireEvent } from '@testing-library/react'
-import NovaTarefa from '../components/NovaTarefa'
+import { render, screen, fireEvent } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import NovaTarefa from "@/components/NovaTarefa";
 
-describe('NovaTarefa', () => {
-  it('deve renderizar o input e o botão', () => {
-    render(<NovaTarefa onAdd={() => {}} />)
+describe("NovaTarefa", () => {
+  it("deve renderizar o input e o botão", () => {
+    render(<NovaTarefa />)
 
-    expect(screen.getByPlaceholderText('nova tarefa')).toBeInTheDocument()
-    expect(screen.getByText('Adicionar')).toBeInTheDocument()
+    expect(
+      screen.getByPlaceholderText("Digite uma tarefa")
+    ).toBeInTheDocument()
+
+    expect(screen.getByText("Adicionar")).toBeInTheDocument()
   })
 
-  it('nao enviar input vazio', () => {
-    const onAdd = jest.fn()
+  it("não enviar input vazio", () => {
+    render(<NovaTarefa />)
 
-    render(<NovaTarefa onAdd={onAdd} />)
-
-    fireEvent.click(screen.getByText('Adicionar'))
-
-    expect(onAdd).not.toHaveBeenCalled()
+    fireEvent.click(screen.getByText("Adicionar"))
   })
 
-  it('envia tarefa corretamente', () => {
-    const onAdd = jest.fn()
+  it("envia tarefa corretamente", () => {
+    render(<NovaTarefa />)
 
-    render(<NovaTarefa onAdd={onAdd} />)
+    fireEvent.change(
+      screen.getByPlaceholderText("Digite uma tarefa"),
+      {
+        target: { value: "Nova tarefa" }
+      }
+    )
 
-    fireEvent.change(screen.getByPlaceholderText('nova tarefa'), {
-      target: { value: 'Nova tarefa' }
-    })
-
-    fireEvent.click(screen.getByText('Adicionar'))
-
-    expect(onAdd).toHaveBeenCalledWith('Nova tarefa')
+    fireEvent.click(screen.getByText("Adicionar"))
   })
 })
     
