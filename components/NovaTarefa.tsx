@@ -1,29 +1,26 @@
-"use client"
+"use client";
 
-import { useState } from "react"
+import { useState } from "react";
 
-type Props = {
-  onAdd: (texto: string) => void
-}
+export default function NovaTarefa() {
+  const [texto, setTexto] = useState("");
 
-export default function NovaTarefa({ onAdd }: Props) {
-  const [texto, setTexto] = useState("")
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!texto.trim()) return
-    onAdd(texto)
-    setTexto("")
+  function adicionarTarefa() {
+    console.log("Nova tarefa:", texto);
+    setTexto("");
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       <input
-        placeholder="nova tarefa"
         value={texto}
         onChange={(e) => setTexto(e.target.value)}
+        placeholder="Digite uma tarefa"
       />
-      <button type="submit">Adicionar</button>
-    </form>
-  )
+
+      <button onClick={adicionarTarefa}>
+        Adicionar
+      </button>
+    </div>
+  );
 }

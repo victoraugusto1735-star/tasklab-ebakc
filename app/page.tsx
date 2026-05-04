@@ -2,7 +2,7 @@ import { getTarefas } from "@/lib/tarefas";
 import NovaTarefa from "@/components/NovaTarefa";
 
 export default async function Page() {
-  const tarefas = await getTarefas()
+  const tarefas = await getTarefas();
 
   return (
     <div>
@@ -14,7 +14,7 @@ export default async function Page() {
         ))}
       </ul>
 
-      <NovaTarefa onAdd={() => {}} />
+      <NovaTarefa />
     </div>
-  )
+  );
 }
