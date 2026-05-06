@@ -2,13 +2,16 @@
 
 import { useState } from "react";
 
-type props = {
+type Props = {
   onAdd: (texto: string) => void;
 };
-export default function NovaTarefa({ onAdd }: props) {
+
+export default function NovaTarefa({ onAdd }: Props) {
   const [texto, setTexto] = useState("");
 
   function adicionarTarefa() {
+    if (!texto.trim()) return;
+
     onAdd(texto);
     setTexto("");
   }

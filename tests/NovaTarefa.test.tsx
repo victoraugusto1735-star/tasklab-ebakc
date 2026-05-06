@@ -4,7 +4,9 @@ import NovaTarefa from "@/components/NovaTarefa";
 
 describe("NovaTarefa", () => {
   it("deve renderizar o input e o botão", () => {
-    render(<NovaTarefa />)
+    const onAddMock = jest.fn()
+
+    render(<NovaTarefa onAdd={onAddMock} />)
 
     expect(
       screen.getByPlaceholderText("Digite uma tarefa")
@@ -14,13 +16,19 @@ describe("NovaTarefa", () => {
   })
 
   it("não enviar input vazio", () => {
-    render(<NovaTarefa />)
+    const onAddMock = jest.fn()
+
+    render(<NovaTarefa onAdd={onAddMock} />)
 
     fireEvent.click(screen.getByText("Adicionar"))
+
+    expect(onAddMock).not.toHaveBeenCalled()
   })
 
   it("envia tarefa corretamente", () => {
-    render(<NovaTarefa />)
+    const onAddMock = jest.fn()
+
+    render(<NovaTarefa onAdd={onAddMock} />)
 
     fireEvent.change(
       screen.getByPlaceholderText("Digite uma tarefa"),
@@ -30,6 +38,7 @@ describe("NovaTarefa", () => {
     )
 
     fireEvent.click(screen.getByText("Adicionar"))
+
+    expect(onAddMock).toHaveBeenCalledWith("Nova tarefa")
   })
 })
-    
