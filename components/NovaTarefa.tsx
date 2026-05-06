@@ -2,11 +2,14 @@
 
 import { useState } from "react";
 
-export default function NovaTarefa() {
+type props = {
+  onAdd: (texto: string) => void;
+};
+export default function NovaTarefa({ onAdd }: props) {
   const [texto, setTexto] = useState("");
 
   function adicionarTarefa() {
-    console.log("Nova tarefa:", texto);
+    onAdd(texto);
     setTexto("");
   }
 

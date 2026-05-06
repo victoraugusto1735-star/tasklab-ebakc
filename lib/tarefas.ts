@@ -3,7 +3,7 @@ export type Tarefas = {
     texto: string
     concluida: boolean
 }
-let tarefas: Tarefas[] = [
+const tarefas: Tarefas[] = [
     { id: 1, texto: 'estudar next', concluida: false },
     { id: 2, texto: 'aprender testes', concluida: false },
 ]
