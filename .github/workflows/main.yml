@@ -1,0 +1,30 @@
+# Nome do workflow, aparece na 'Actions'
+name: pipeline CI/CD
+# Definir quando o pipeline sera disparado
+on: 
+  push:
+    branches:
+      - main
+  workflow_dispatch: #habilitar o botão 'run workflow' no github actiond
+  
+jobs:
+  #Primeiro job: build
+  build:
+    runs-on: ubuntu-latest #imagem da maquina usada no CI
+    
+    steps:
+      - name: checkout do codigo
+        uses: actions/checkout@v6
+
+      - name: Istalação do node 
+        uses: actions/setup-node@v4
+        
+        with:
+          node-version: '20'
+          
+      - name: Istalação das depêndencias
+        run: npm install
+        
+        
+      - name: Rodar o build
+        run: npm run build 
