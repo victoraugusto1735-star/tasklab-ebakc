@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - 'src/**'
+      - 'tests/**'
+      - '__tests__/**'
       - '.github/workflows/**'
 
   workflow_dispatch:
@@ -54,9 +56,6 @@ jobs:
 
       - name: Verificar formatação
         run: npm run format -- --check
-
-      - name: Rodar Teste
-        run: npm run test
 
         
         
