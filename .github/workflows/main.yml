@@ -4,54 +4,46 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'src/**'
-      - 'tests/**'
-      - '__tests__/**'
-      - '.github/workflows/**'
+
+  pull_request:
+    branches:
+      - main
 
   workflow_dispatch:
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout do codigo
         uses: actions/checkout@v4
 
-      - name: Instalação do node
+      - name: Instalar Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: package-lock.json
+          node-version: 20
+          cache: npm
 
-      - name: Instalação das dependências
-        run: npm install
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Rodar lint
+        run: npm run lint
+
+      - name: Rodar testes
+        run: npm run test
 
       - name: Rodar build
         run: npm run build
 
-  teste:
+  deploy:
     runs-on: ubuntu-latest
-    needs: build
+    needs: ci
 
     steps:
       - name: Checkout do codigo
         uses: actions/checkout@v4
 
-      - name: Instalação do node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: package-lock.json
-
-      - name: Instalação das dependências
-        run: npm install
-
-      - name: Rodar lint
-        run: npm run lint
-        
-        
+      - name: Deploy na Vercel
+        run: npx vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
