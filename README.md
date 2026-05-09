@@ -76,6 +76,12 @@ https://github.com/victoraugusto1735-star/tasklab-ebakc
 
 ---
 
+## Projeto publicado
+
+https://seu-projeto.vercel.app
+
+---
+
 ## Autor
 
 Victor Augusto
