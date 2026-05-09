@@ -20,4 +20,3 @@ export const getTarefas = async (): Promise<Tarefas[]> => {
     tarefas.push(nova)
     return nova
     }
-    
