@@ -1,32 +1,38 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+import { useState } from "react"
 
-type Props = {
-  onAdd: (texto: string) => void;
-};
+export default function NovaTarefa({
+  onAdd
+}: {
+  onAdd: (texto: string) => void
+}) {
+  const [texto, setTexto] = useState("")
 
-export default function NovaTarefa({ onAdd }: Props) {
-  const [texto, setTexto] = useState("");
+  function handleAdd() {
+    if (!texto.trim()) return
 
-  function adicionarTarefa() {
-    if (!texto.trim()) return;
-
-    onAdd(texto);
-    setTexto("");
+    onAdd(texto)
+    setTexto("")
   }
 
   return (
     <div>
       <input
-        value={texto}
-        onChange={(e) => setTexto(e.target.value)}
+        type="text"
         placeholder="Digite uma tarefa"
+        value={texto}
+        onChange={(e) =>
+          setTexto(e.target.value)
+        }
       />
 
-      <button onClick={adicionarTarefa}>
+      <button
+        className="add-btn"
+        onClick={handleAdd}
+      >
         Adicionar
       </button>
     </div>
-  );
+  )
 }

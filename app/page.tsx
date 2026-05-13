@@ -5,7 +5,7 @@ export default async function Page() {
   const tarefas = await getTarefas();
 
   return (
-    <div>
+    <div className="container">
       <h1>Lista de tarefas</h1>
       <TarefasClient tarefasIniciais={tarefas} />
     </div>
